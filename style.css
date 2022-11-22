@@ -1,0 +1,7 @@
+body{
+    margin: 0;
+    height: 850px;
+    max-width: 414px;   
+    background: url(./22.png) no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<style>
+    .name {
+        position: relative;
+        top: 61px;
+        left: 16px;
+        color: #fffaff;
+        font-size: 18px;
+    }
+
+    #cname {
+        position: relative;
+        left: 6px;
+        opacity: 0
+    }
+    #nowtime{
+        position: relative;
+        top: 100px;
+        left: 100px;
+        font-size: 18px;
+        font-weight:600;
+    }
+    #nowDay{
+        position: relative;
+        top: 540px;
+        left: 70px;
+        font-size: 14px;
+        color: #757575;
+    }
+</style>
+
+<body>
+    <div class="name">
+        <span id="name">罗**</span>
+        <button id="cname">&nbsp;&nbsp;</button>
+    </div>
+
+    <div id="nowtime">在这里显示时间</div>
+    <div id="nowDay"></div>
+    <script>
+        $('#cname').click(() => {
+
+            if ($('#name').text() === '罗国元') {
+                $('#name').text('罗**')
+            } else {
+                $('#name').text('罗国元')
+            }
+        })
+        //dete
+        function NowTime(){
+                //获取年月日
+                var time=new Date();
+                var year=time.getFullYear();
+                var month=time.getMonth();
+                var day=time.getDate();
+                
+                //获取时分秒
+                var h=time.getHours();
+                var m=time.getMinutes();
+                var s=time.getSeconds();
+                
+                //检查是否小于10
+                h=check(h);
+                m=check(m);
+                s=check(s);
+                document.getElementById("nowtime").innerHTML=year+"年"+month+"月"+day+"日  "+h+":"+m+":"+s;
+            }
+            //时间数字小于10，则在之前加个“0”补位。
+            function check(i){
+                //方法一，用三元运算符
+                var num;
+                i<10?num="0"+i:num=i;
+                return num;
+                
+                //方法二，if语句判断
+                //if(i<10){
+                //    i="0"+i;
+                //}
+                //return i;
+            }
+            window.onload=function(){
+                //每1秒刷新时间
+              setInterval("NowTime()",1000);
+              setInterval("NowDay()",86400000);
+            
+            }
+
+            NowTime()
+            check()
+            
+            function NowDay(){
+                //获取年月日
+                var time=new Date();
+                var year=time.getFullYear();
+                var month=time.getMonth();
+                var day=time.getDate();
+                
+                //获取时分秒
+                var h=time.getHours();
+                var m=time.getMinutes();
+                var s=time.getSeconds();
+                
+                //检查是否小于10
+                h=check(h);
+                m=check(m);
+                s=check(s);
+                document.getElementById("nowDay").innerHTML=year+"-"+month+"-"+day;
+            }
+            NowDay()
+    </script>
+</body>
+
+</html>
