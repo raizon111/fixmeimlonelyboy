@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
 	<title>Document</title>
 	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>	
 </head>
@@ -145,10 +145,27 @@
 		background-size: contain;
 	}
 	.bottom{
-		background: url(./bottom1.png);
+		background: url(./bottom1.png) no-repeat;
 		width: 100%;
 		height: 346px;
 		background-size: contain;
+	}
+	html {
+	  overflow-y: scroll;
+	}
+	
+	:root {
+	  overflow-y: auto;
+	  overflow-x: hidden;
+	}
+	
+	:root body {
+	  position: absolute;
+	}
+	
+	body {
+	  width: 100vw;
+	  overflow: hidden;
 	}
 </style>
 <body>
