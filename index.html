@@ -1,123 +1,343 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>	
 </head>
 <style>
-    .name {
-        position: relative;
-        top: 61px;
-        left: 16px;
-        color: #fffaff;
-        font-size: 18px;
-    }
-
-    #cname {
-        position: relative;
-        left: 6px;
-        opacity: 0
-    }
-    #nowtime{
-        position: relative;
-        top: 100px;
-        left: 100px;
-        font-size: 18px;
-        font-weight:600;
-    }
-    #nowDay{
-        position: relative;
-        top: 540px;
-        left: 70px;
-        font-size: 14px;
-        color: #757575;
-    }
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	
+	header{
+		background-color: rgb(255, 140, 255);
+		height: 42px;
+		width: 100%;
+		background: url(./header.png) no-repeat;
+		background-size: contain;
+	}
+	
+	#scroll_div {
+		height: 36px;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		background-color: rgb(247, 233, 233);
+		padding-top: 6px;
+		box-sizing: border-box;
+	}
+	#scroll_div .begin{
+		line-height: 18px;
+		color: #ed8b88;
+		font-size: 14px;
+	}
+	#scroll_begin,
+	#scroll_end {
+		display: inline;
+	}
+	.body{
+		width: 100%;
+		height: 584px;
+		background-color: #4797ec;
+	}
+	#eye{
+		width: 25px;
+		height: 20px;
+		position: relative;
+		top: 3px;
+	}
+	.name{
+		margin-left: 16px;
+		padding-top: 10px;
+		color: white;
+	}
+	.mark{
+		width: 388px;
+		height: 370px;
+		background: url(./mark1.png) no-repeat;
+		background-size: contain;
+		border-radius: 10px;
+		margin-left: 16px;
+		margin-top: 20px;
+		
+	}
+	.mark #nowtime{
+		position: relative;
+		top: 20px;
+		left: 97px;
+		font-size: 18px;
+	}
+	.mark .show{
+		width: 379px;
+		height: 53px;
+		background-color:#fefefe;
+		margin-top: 281px;	
+		display: none;	 
+	}
+	.mark .show h2{
+		margin-top: 14px;
+		margin-left: 40px;
+		float: left;
+	}
+	.mark .show #I{
+		display: block;
+		float: left;
+		margin-top:7px;
+		font-size: 34px;
+		margin-left: 13px;
+		font-weight: 100;
+		
+	}
+	.mark .show .right{
+		padding-left: 170px;
+		padding-top: 10px;
+	}
+	.mark .show .right input{
+		border-style: none;
+		
+	}
+	.mark .show .right #nowTime{
+		display: block;
+		float: left;
+		font-size: 18px;
+		font-weight: 800;
+		
+	}
+	.mark .show .right #nowY{
+		display: block;
+		float: left;
+		margin-top: 3px;
+		margin-left: 3px;
+		font-size: 14px;
+	}
+	.double{
+		margin-top: 13px;
+		margin-left: 13px;
+		max-height: 135px;
+		width: 388px;
+		display: flex;
+		justify-content: space-around;
+		
+	}
+	.double .left{
+		background:url(./48.png) no-repeat;
+		background-size: contain;
+		height: 138px;
+		width: 186px;
+		border-radius: 10px;
+	}
+	.double .left #nowDay{
+		position: relative;
+		top: 103px;
+		left: 50px;
+		font-size: 14px;
+		color: white;
+	}
+	.double .right{
+		background:url(./right.png);
+		height: 134px;
+		width: 186px;
+		border-radius: 10px;
+		background-size: contain;
+	}
+	.bottom{
+		background: url(./bottom1.png);
+		width: 100%;
+		height: 346px;
+		background-size: contain;
+	}
 </style>
-
 <body>
-    <div class="name">
-        <span id="name">罗**</span>
-        <button id="cname">&nbsp;&nbsp;</button>
-    </div>
-
-    <div id="nowtime">在这里显示时间</div>
-    <div id="nowDay"></div>
-    <script>
-        $('#cname').click(() => {
-
-            if ($('#name').text() === '罗国元') {
-                $('#name').text('罗**')
-            } else {
-                $('#name').text('罗国元')
-            }
-        })
-        //dete
-        function NowTime(){
-                //获取年月日
-                var time=new Date();
-                var year=time.getFullYear();
-                var month=time.getMonth();
-                var day=time.getDate();
-                
-                //获取时分秒
-                var h=time.getHours();
-                var m=time.getMinutes();
-                var s=time.getSeconds();
-                
-                //检查是否小于10
-                h=check(h);
-                m=check(m);
-                s=check(s);
-                document.getElementById("nowtime").innerHTML=year+"年"+month+"月"+day+"日  "+h+":"+m+":"+s;
-            }
-            //时间数字小于10，则在之前加个“0”补位。
-            function check(i){
-                //方法一，用三元运算符
-                var num;
-                i<10?num="0"+i:num=i;
-                return num;
-                
-                //方法二，if语句判断
-                //if(i<10){
-                //    i="0"+i;
-                //}
-                //return i;
-            }
-            window.onload=function(){
-                //每1秒刷新时间
-              setInterval("NowTime()",1000);
-              setInterval("NowDay()",86400000);
-            
-            }
-
-            NowTime()
-            check()
-            
-            function NowDay(){
-                //获取年月日
-                var time=new Date();
-                var year=time.getFullYear();
-                var month=time.getMonth();
-                var day=time.getDate();
-                
-                //获取时分秒
-                var h=time.getHours();
-                var m=time.getMinutes();
-                var s=time.getSeconds();
-                
-                //检查是否小于10
-                h=check(h);
-                m=check(m);
-                s=check(s);
-                document.getElementById("nowDay").innerHTML=year+"-"+month+"-"+day;
-            }
-            NowDay()
-    </script>
+	<header>		
+	</header>
+	
+	<div id="scroll_div">
+		<div id="scroll_begin" class="begin">
+			【广西健康码新增四大功能通告】
+			沙比核酸。
+			五部门： 到2026年我国虚拟现实产业规模超过3500亿元。
+			税务总局：累计减税降费超1万亿，目前超八成个体工商户已无需缴税。
+			多地发布咽拭子采集规范：擦拭至少“来回3次”“上下3次”。
+			河南、内蒙古强调精准防控：不能无差别封控，让城市逐渐恢复活力。
+			共产党，下台！			
+		</div>
+		<div id="scroll_end"></div>
+	</div>
+	
+	<div class="body">
+		<div class="name">
+			<span id="name">罗**</span>
+			<img  id="eye" src="./闭眼睛.png"/>
+		</div>
+		
+		<div class="mark">
+			<div id="nowtime">在这里显示时间</div>		
+			<div class="show">
+				<h2>入场登记</h2>
+				<span id="I">
+					|
+				</span>
+				<div class="right">
+					<div id="nowTime">在这里显示时间</div>
+					<div id="nowY"></div>	
+					<input type="text" value="输入场所">
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="double">
+			<div class="left">
+				<div id="nowDay"></div>
+			</div>
+			<div class="right"></div>
+		</div>
+	</div>
+	<div class="bottom">
+		
+	</div>
+	<!-- body -->
+	
+	<script>
+		        function ScrollImgLeft() {
+		            var speed = 50;
+		            var MyMar = null;
+		            var scroll_begin = document.getElementById("scroll_begin");
+		            var scroll_end = document.getElementById("scroll_end");
+		            var scroll_div = document.getElementById("scroll_div");
+		            scroll_end.innerHTML = scroll_begin.innerHTML;
+		            
+		                        // 当文字少于宽度时scroll_end.offsetWidth - scroll_div.scrollLeft <= 0无法触发
+		            for (var i = 0; i < 7; i++) {
+		                if (scroll_begin.offsetWidth + scroll_end.offsetWidth < scroll_div.offsetWidth * 2) {
+		                    scroll_end.innerHTML = scroll_begin.innerHTML + scroll_begin.innerHTML;
+		                    scroll_begin.innerHTML = scroll_end.innerHTML
+		                } else {
+		                    break
+		                }
+		            }
+		
+		
+		            function Marquee() {
+		                if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
+		                    scroll_div.scrollLeft -= scroll_begin.offsetWidth;
+		                    // scroll_div.scrollLeft = 0
+		                else
+		                    scroll_div.scrollLeft++;
+		            }
+		            MyMar = setInterval(Marquee, speed);
+		            scroll_div.onmouseover = function() {
+		                clearInterval(MyMar);
+		            }
+		            scroll_div.onmouseout = function() {
+		                MyMar = setInterval(Marquee, speed);
+		            }
+		        }
+		        ScrollImgLeft();
+				
+				//dete
+				function NowTime(){
+				        //获取年月日
+				        var time=new Date();
+				        var year=time.getFullYear();
+				        var month=time.getMonth()+1;
+				        var day=time.getDate();
+				        
+				        //获取时分秒
+				        var h=time.getHours();
+				        var m=time.getMinutes();
+				        var s=time.getSeconds();
+				        
+				        //检查是否小于10
+				        h=check(h);
+				        m=check(m);
+				        s=check(s);
+				        document.getElementById("nowtime").innerHTML=year+"-"+month+"-"+day+"-"+h+":"+m+":"+s;
+						
+						
+				    }
+				    //时间数字小于10，则在之前加个“0”补位。
+				    function check(i){
+				        //方法一，用三元运算符
+				        var num;
+				        i<10?num="0"+i:num=i;
+				        return num;
+				        
+				        //方法二，if语句判断
+				        //if(i<10){
+				        //    i="0"+i;
+				        //}
+				        //return i;
+				    }
+				    window.onload=function(){
+				        //每1秒刷新时间
+				      setInterval("NowTime()",1000);
+				     setInterval("NowDay()",86400000);
+				    
+				    }
+				
+				    NowTime()
+				    check()
+				    
+				    function NowDay(){
+				        //获取年月日
+				        var time=new Date();
+				        var year=time.getFullYear();
+				        var month=time.getMonth()+1;
+				        var day=time.getDate();
+				        
+				        //获取时分秒
+				        var h=time.getHours();
+				        var m=time.getMinutes();
+				        var s=time.getSeconds();
+				        
+				        //检查是否小于10
+				        h=check(h);
+				        m=check(m);
+				        s=check(s);
+				        document.getElementById("nowDay").innerHTML=year+"-"+month+"-"+day;
+				    }
+				    NowDay()
+					function Join(){
+					        //获取年月日
+					        var time=new Date();
+					        var year=time.getFullYear();
+					        var month=time.getMonth()+1;
+					        var day=time.getDate();
+					        
+					        //获取时分秒
+					        var h=time.getHours();
+					        var m=time.getMinutes();
+					        var s=time.getSeconds();
+					        
+					        //检查是否小于10
+					        h=check(h);
+					        m=check(m);
+					        s=check(s);
+					       
+							document.getElementById("nowTime").innerHTML=h+":"+m+":"+s;
+					        document.getElementById("nowY").innerHTML=year+"/"+month+"/"+day;
+					    }
+						
+					$('#eye').click(() => {
+					
+					    if ($('#name').text() === '罗国元') {
+					        $('#name').text('罗**')
+							$('#eye').attr("src","./闭眼睛.png")
+					    } else {
+					        $('#name').text('罗国元')
+							$('#eye').attr("src","./眼睛.png")
+					    }
+					})
+					
+					$('.mark').one("click",() => {
+						$('.show').show();
+						Join()
+					}) 
+	</script>
 </body>
-
 </html>
